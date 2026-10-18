@@ -58,6 +58,7 @@ A Stream Deck + XL (9 × 4 keys, six dials) has room for the rest: filters, Bass
 
 - **No level meters.** The ADI-2 doesn't send audio levels over MIDI, only settings.
 - **Changes made in RME's ADI-2 Remote** reach the deck within 15 seconds; the unit doesn't announce them to other programs. Changes on the unit itself or by IR remote show up immediately.
+- **Windows: "BLOCKED BY WINDOWS"** means Windows refused to start the plugin's small MIDI helper (`adi2midi-win.exe`). The usual cause is **Smart App Control** (Windows Security → App & browser control → Smart App Control), which blocks every program without a paid code-signing certificate, and this free hobby plugin doesn't have one. Smart App Control has no per-app exception, so the plugin can only run with it set to *Off* (or *Evaluation*). Less often, an antivirus has removed the file; reinstalling the plugin brings it back. The macOS version is signed and notarized by Apple and isn't affected.
 - **Windows: "PORT BUSY"** means another program (usually ADI-2 Remote or a DAW) has the ADI-2's MIDI port open. Windows lets one program use a MIDI port at a time; close the other one. macOS and Windows 11 with Windows MIDI Services don't have this limit.
 - **DAWs**: if a DAW uses the ADI-2's MIDI port as an input (reported with Logic Pro), the unit may ignore the deck while audio plays. Disable that MIDI input in the DAW.
 - The plugin follows RME's published MIDI table for the ADI-2 series. The ADI-2 Pro EX identifies itself as an ADI-2 Pro and works the same way.
