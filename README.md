@@ -7,7 +7,7 @@
 
 It's a plugin for the [Elgato Stream Deck][Stream Deck] on Windows and macOS that puts an [RME ADI-2][] converter on your keys and dials: volume, mute, source, EQ presets, loudness, setups and almost every setting from the unit's menus, with live values read from the unit, so the deck always shows what the ADI-2 is doing.
 
-Works with the ADI-2 Pro EX, ADI-2 Pro FS / FS R BE, ADI-2/4 Pro SE and ADI-2 DAC.
+Works with the ADI-2 Pro EX, ADI-2 Pro FS / FS R BE, ADI-2/4 Pro SE and ADI-2 DAC. Runs on every Stream Deck: all actions work on keys (Stream Deck MK.2, Mini, XL, Neo, +, + XL and Stream Deck Mobile), and on a Stream Deck + or + XL they also work on the dials.
 
 <img src="images/deck_plus.png" width="451" alt="Stream Deck+ layout">
 
@@ -17,6 +17,8 @@ Install it from the Elgato Marketplace inside the Stream Deck app, or download t
 
 Requires Stream Deck 7.1 or newer on Windows 10+ or macOS 12+, and the ADI-2 connected to the same computer by USB. On Windows, RME's MADIface series driver must be installed (the same one ADI-2 Remote needs). No other software is needed.
 
+The ADI-2 can also sit somewhere else: plugged into a Raspberry Pi running the [ADI-2-Pi](#over-the-network-adi-2-pi) bridge, and the deck controls it over your network.
+
 ## Setup
 
 1. Update the ADI-2 to the latest firmware (RME's Flash Update Tool, rme-audio.de → Downloads).
@@ -25,13 +27,26 @@ Requires Stream Deck 7.1 or newer on Windows 10+ or macOS 12+, and the ADI-2 con
 
 Everything technical sits in a collapsed *Advanced* section of each action; you normally don't need it.
 
+### Over the network (ADI-2-Pi)
+
+If the ADI-2 is plugged into a Raspberry Pi running the ADI-2-Pi bridge instead of this computer:
+
+1. Open any action's settings, *Advanced → Unit → Connection* and choose **ADI-2-Pi on the network**.
+2. **Address**: the Pi's name or IP address, for example `adi2-pi.local` (the default) or `192.168.1.20`. Add `:port` if the bridge doesn't run on port 80, e.g. `192.168.1.20:8080`. **Find** searches the network and lists each Pi by name and by IP address; pick one. **Connect** connects again right away.
+3. The status line says *Connected · ADI-2 Pro via ADI-2-Pi*. Everything works as with USB, including the names of setups and EQ presets. Changes from the unit's knob, its remote or other apps using the bridge show up immediately.
+
+The setting applies to all actions. MIDI Control must still be on at the unit. A fixed IP address (a DHCP reservation in your router) is the most reliable choice if the name isn't found. On macOS, allow Stream Deck access to the local network if macOS asks (System Settings → Privacy & Security → Local Network). The bridge's volume limits and rise-speed limit apply to the deck too.
+
 ## Actions
 
 | Action | Where | What it does |
 |---|---|---|
-| Level | Key or dial | Volume, bass, treble, balance, width, loudness, every parametric EQ band and input trim, per output. Rotate to adjust, push and turn for fine steps (0.1 dB on volume). Push / tap is assignable: mute, reset to 0 dB or centre, Recall, or Loudness / EQ / Bass-Treble / Dim on/off. Keys mute, step up or down, recall a value, or switch one of those on/off. |
+| Level | Key or dial | Volume, bass, treble, balance, width, loudness, every parametric EQ band and input trim, per output. Rotate to adjust, push and turn for fine steps (0.1 dB on volume). On a dial, push / tap is assignable: mute, reset to 0 dB or centre, Recall, or Loudness / EQ / Bass-Treble / Dim on/off, so one dial adjusts e.g. the bass and switches Bass/Treble. Keys mute, step up or down, or recall a value; to switch Loudness, EQ and so on with a key, use a Setting key. |
 | Setting | Key or dial | Source, output level / Hi-Power, crossfeed, DA and AD filter, mono, polarity, EQ and EQ preset, Bass/Treble, loudness, dim, mute, plus device settings like Basic Mode, clock source, SPDIF input, SRC, Dual / Balanced Phones, Auto Dark and display. A key steps through the options, selects one option and lights while it is active, or switches between two. On a dial: turn to choose and push to confirm, or change directly. |
 | Load Setup | Key or dial | Loads one of the unit's nine stored setups, shown by the name stored in the unit. The setup last loaded from Stream Deck is marked. |
+| Status | Key or dial | Read-only: the connection to the unit (green *Connected*, red *No device*, amber *Port busy*; through a Pi also red *No ADI-2-Pi* and amber *MIDI off*), captioned with the unit's name so it stands apart from other plugins' connection keys; the unit itself (name and device ID); or its clock source and sample rate. Press to re-read the unit; without a connection it reconnects. |
+
+**Titles**: a title typed into Stream Deck's own Title field replaces the control's caption (output and function). On a key Stream Deck draws it; on a Stream Deck + dial the plugin draws it at the top of its panel.
 
 **Recall and Link** work like in ADI-2 Remote, where they are app features too: Recall jumps to a stored value and back on the next press; a volume can be linked to other outputs so they move and mute together.
 
@@ -39,18 +54,18 @@ When a key steps through options, those the unit refuses at the moment, such as 
 
 ## Look
 
-Under *Advanced → Look* in any action:
+Under *Advanced → Look* in the Level, Setting and Load Setup actions (it applies to all of them):
 
 - **Colours**: follow the unit's *Meter Color* (default), or ADI-2 Remote's colours per output. Change Meter Color on the unit and the deck follows.
-- **Level style**: ADI-2 Remote knobs; the unit's volume screen; or the knob, switching to the unit's volume screen while a value changes (default). The volume screen follows the unit's *Display Mode* (Default / Dark).
+- **Level style** (Level controls only): ADI-2 Remote knobs; the unit's volume screen; or the knob, switching to the unit's volume screen while a value changes (default). The volume screen follows the unit's *Display Mode* (Default / Dark).
 
 ## Layout examples
 
-A standard Stream Deck (5 × 3) set up for headphone listening: volume down / volume / up for Phones 3/4, two keys that switch the phones between AES and Analog like radio buttons (say two PCs), EQ preset, EQ, loudness, crossfeed and bass. The bottom row has the speaker volume and mute, two setups and Auto Dark.
+A standard Stream Deck (MK.2, 5 × 3) set up for headphone listening: volume down / volume / up for Phones 3/4, two keys that switch the phones between AES and Analog like radio buttons (say two PCs), EQ preset, EQ, loudness, crossfeed and bass. The bottom row has the speaker volume and mute, two setups and a Status key showing the connection.
 
 <img src="images/deck_standard.png" width="560" alt="Stream Deck layout">
 
-A Stream Deck + XL (9 × 4 keys, six dials) has room for the rest: filters, Bass/Treble, balance, output level and Hi-Power, Line Out with loudness and EQ, Phones 1/2, the headphone/line switching options, four setups and the device settings. The dials carry the phones volume (here in the unit-display look), the line out, bass, treble, an EQ preset browser and the setup loader.
+A Stream Deck + XL (9 × 4 keys, six dials; official Elgato picture) has room for the rest: filters, Bass/Treble, balance, output level and Hi-Power, Line Out with loudness and EQ, Phones 1/2, the headphone/line switching options, four setups and the device settings. The dials carry the phones volume (here in the unit-display look), the line out, bass, treble, an EQ preset browser and the setup loader.
 
 <img src="images/deck_xl.png" width="976" alt="Stream Deck + XL layout">
 
@@ -59,6 +74,7 @@ A Stream Deck + XL (9 × 4 keys, six dials) has room for the rest: filters, Bass
 - **No level meters.** The ADI-2 doesn't send audio levels over MIDI, only settings.
 - **Changes made in RME's ADI-2 Remote** reach the deck within 15 seconds; the unit doesn't announce them to other programs. Changes on the unit itself or by IR remote show up immediately.
 - **Windows: "BLOCKED BY WINDOWS"** means Windows refused to start the plugin's small MIDI helper (`adi2midi-win.exe`). The usual cause is **Smart App Control** (Windows Security → App & browser control → Smart App Control), which blocks every program without a paid code-signing certificate, and this free hobby plugin doesn't have one. Smart App Control has no per-app exception, so the plugin can only run with it set to *Off* (or *Evaluation*). Less often, an antivirus has removed the file; reinstalling the plugin brings it back. The macOS version is signed and notarized by Apple and isn't affected.
+- **"NO ADI-2-PI"** (network connection only): the Pi doesn't answer at the address entered. Check that it's on and in the same network, and try its IP address instead of the name. **"MIDI CONTROL OFF"**: the Pi reaches the unit but the unit doesn't answer; switch MIDI Control on.
 - **Windows: "PORT BUSY"** means another program (usually ADI-2 Remote or a DAW) has the ADI-2's MIDI port open. Windows lets one program use a MIDI port at a time; close the other one. macOS and Windows 11 with Windows MIDI Services don't have this limit.
 - **DAWs**: if a DAW uses the ADI-2's MIDI port as an input (reported with Logic Pro), the unit may ignore the deck while audio plays. Disable that MIDI input in the DAW.
 - The plugin follows RME's published MIDI table for the ADI-2 series. The ADI-2 Pro EX identifies itself as an ADI-2 Pro and works the same way.
