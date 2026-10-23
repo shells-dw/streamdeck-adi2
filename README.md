@@ -17,8 +17,6 @@ Install it from the Elgato Marketplace inside the Stream Deck app, or download t
 
 Requires Stream Deck 7.1 or newer on Windows 10+ or macOS 12+, and the ADI-2 connected to the same computer by USB. On Windows, RME's MADIface series driver must be installed (the same one ADI-2 Remote needs). No other software is needed.
 
-The ADI-2 can also sit somewhere else: plugged into a Raspberry Pi running the [ADI-2-Pi](#over-the-network-adi-2-pi) bridge, and the deck controls it over your network.
-
 ## Setup
 
 1. Update the ADI-2 to the latest firmware (RME's Flash Update Tool, rme-audio.de → Downloads).
@@ -27,15 +25,6 @@ The ADI-2 can also sit somewhere else: plugged into a Raspberry Pi running the [
 
 Everything technical sits in a collapsed *Advanced* section of each action; you normally don't need it.
 
-### Over the network (ADI-2-Pi)
-
-If the ADI-2 is plugged into a Raspberry Pi running the ADI-2-Pi bridge instead of this computer:
-
-1. Open any action's settings, *Advanced → Unit → Connection* and choose **ADI-2-Pi on the network**.
-2. **Address**: the Pi's name or IP address, for example `adi2-pi.local` (the default) or `192.168.1.20`. Add `:port` if the bridge doesn't run on port 80, e.g. `192.168.1.20:8080`. **Find** searches the network and lists each Pi by name and by IP address; pick one. **Connect** connects again right away.
-3. The status line says *Connected · ADI-2 Pro via ADI-2-Pi*. Everything works as with USB, including the names of setups and EQ presets. Changes from the unit's knob, its remote or other apps using the bridge show up immediately.
-
-The setting applies to all actions. MIDI Control must still be on at the unit. A fixed IP address (a DHCP reservation in your router) is the most reliable choice if the name isn't found. On macOS, allow Stream Deck access to the local network if macOS asks (System Settings → Privacy & Security → Local Network). The bridge's volume limits and rise-speed limit apply to the deck too.
 
 ## Actions
 
