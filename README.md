@@ -1,6 +1,3 @@
-![GitHub last commit](https://img.shields.io/github/last-commit/shells-dw/streamdeck-adi2) [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/dwshells) [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dwshells)
-
-
 # ADI-2 Control (unofficial Stream Deck plugin)
 
 ## What Is This (and what does it do?)
