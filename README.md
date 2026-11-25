@@ -4,7 +4,7 @@
 
 It's a plugin for the [Elgato Stream Deck][Stream Deck] on Windows and macOS that puts an [RME ADI-2][] converter on your keys and dials: volume, mute, source, EQ presets, loudness, setups and almost every setting from the unit's menus, with live values read from the unit, so the deck always shows what the ADI-2 is doing.
 
-Works with every unit RME's ADI-2 Remote supports – all ADI-2 Pro versions (2016 Pro, AE, FS, FS R BE, EX), ADI-2/4 Pro SE and EX, ADI-2 DAC – following RME's MIDI table 1.0. Not the original ADI-2 converter (no USB). The ADI-2 DAC EX isn't in RME's table yet and is untested. The ADI-2/4 Pro SE and EX share a device ID; the plugin tells them apart from the unit's status message. Tested on an ADI-2 Pro EX; the other models only against RME's table. Runs on every Stream Deck: all actions work on keys (Stream Deck MK.2, Mini, XL, Neo, +, + XL and Stream Deck Mobile), and on a Stream Deck + or + XL they also work on the dials.
+Works with every unit RME's ADI-2 Remote supports – all ADI-2 Pro versions (2016 Pro, AE, FS, FS R BE, EX), ADI-2/4 Pro SE and EX, ADI-2 DAC – following RME's MIDI table 1.2. Not the original ADI-2 converter (no USB). The ADI-2 DAC EX isn't in RME's table yet and is untested. The ADI-2/4 Pro SE and EX share a device ID; the plugin tells them apart from the unit's status message. Tested on an ADI-2 Pro EX; the other models only against RME's table. Runs on every Stream Deck: all actions work on keys (Stream Deck MK.2, Mini, XL, Neo, +, + XL and Stream Deck Mobile), and on a Stream Deck + or + XL they also work on the dials.
 
 <img src="images/deck_plus.png" width="451" alt="Stream Deck+ layout">
 
@@ -90,7 +90,7 @@ A Stream Deck + XL (9 × 4 keys, six dials; official Elgato picture) has room fo
 - **"NO ADI-2-PI"** (network connection only): the Pi doesn't answer at the address entered. Check that it's on and in the same network, and try its IP address instead of the name. **"MIDI CONTROL OFF"**: the Pi reaches the unit but the unit doesn't answer; switch MIDI Control on. **"ACCESS KEY?"**: the Pi has an access key and the one entered is missing or wrong; the plugin then stops trying until you enter it (or press the Status key). After ten wrong keys in a minute the Pi refuses everything for a minute (**"KEY LOCKED 1 MIN"**); the plugin waits and tries again by itself.
 - **Windows: "PORT BUSY"** means another program has the ADI-2's MIDI port open exclusively (e.g. a DAW); close it. ADI-2 Remote doesn't cause this.
 - **DAWs**: if a DAW uses the ADI-2's MIDI port as an input (seen with Logic Pro), the unit may ignore the deck while audio plays. Disable that MIDI input in the DAW.
-- The plugin follows RME's MIDI table for the ADI-2 series, version 1.0 (October 2026). The ADI-2 Pro EX identifies itself as an ADI-2 Pro and works the same way. One deliberate difference: for the Line Out level of the ADI-2/4 Pro SE / EX the table repeats the ADI-2 Pro's four levels, while these units have five (+1 … +24 dBu); the plugin uses the five.
+- The plugin follows RME's MIDI table for the ADI-2 series, version 1.2 (October 2026). The ADI-2 Pro EX identifies itself as an ADI-2 Pro and works the same way.
 - **Values shown as "#n"** (e.g. *#6*): the unit reports a setting value that RME's table doesn't list (possibly the ADI-2 DAC EX's second optical input). The plugin shows the raw number instead of guessing a name; selecting such a value from the deck isn't possible until RME publishes it.
 - In **Basic Mode DAC**, the Pro and 2/4 models number their sources differently (Auto, AES, SPDIF coax, Optical, Analog, USB 1/2, USB 3/4); Source keys follow the Basic Mode setting.
 
@@ -111,10 +111,6 @@ If you'd like to drop me a coffee for the hours I've spent on this: [![ko-fi](ht
 # Disclaimer
 
 This is a private project, I am not affiliated with RME or Elgato. I wrote this plugin out of personal interest.
- 
-This plugin changes levels on your ADI-2 interface. A wrong setting, a bug or an unexpected state can produce sudden loud output. Test new buttons at low monitor volume first.
- 
-The plugin is provided as is, without warranty of any kind; use it at your own risk.
 
 <!-- Reference Links -->
 
